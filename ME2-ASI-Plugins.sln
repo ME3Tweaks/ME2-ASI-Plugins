@@ -3,24 +3,25 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.106
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ME2-ASI-Plugins", "ME2-ASI-Plugins\ME2-ASI-Plugins.vcxproj", "{ED8EC607-62BF-425C-982D-4269BC6D820C}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FunctionLogger", "FunctionLogger\FunctionLogger.vcxproj", "{20D765B4-0479-4F04-BCD7-0877C2C5AB3C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ME2-SDK", "ME2-SDK", "{CF3260D3-9557-470D-966B-89CDD5EC8AB7}"
+	ProjectSection(SolutionItems) = preProject
+		ME2-SDK\ME3TweaksHeader.h = ME2-SDK\ME3TweaksHeader.h
+		ME2-SDK\SdkHeaders.h = ME2-SDK\SdkHeaders.h
+		ME2-SDK\UE3SdkGenerator.log = ME2-SDK\UE3SdkGenerator.log
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|x64 = Debug|x64
 		Debug|x86 = Debug|x86
-		Release|x64 = Release|x64
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{ED8EC607-62BF-425C-982D-4269BC6D820C}.Debug|x64.ActiveCfg = Debug|x64
-		{ED8EC607-62BF-425C-982D-4269BC6D820C}.Debug|x64.Build.0 = Debug|x64
-		{ED8EC607-62BF-425C-982D-4269BC6D820C}.Debug|x86.ActiveCfg = Debug|Win32
-		{ED8EC607-62BF-425C-982D-4269BC6D820C}.Debug|x86.Build.0 = Debug|Win32
-		{ED8EC607-62BF-425C-982D-4269BC6D820C}.Release|x64.ActiveCfg = Release|x64
-		{ED8EC607-62BF-425C-982D-4269BC6D820C}.Release|x64.Build.0 = Release|x64
-		{ED8EC607-62BF-425C-982D-4269BC6D820C}.Release|x86.ActiveCfg = Release|Win32
-		{ED8EC607-62BF-425C-982D-4269BC6D820C}.Release|x86.Build.0 = Release|Win32
+		{20D765B4-0479-4F04-BCD7-0877C2C5AB3C}.Debug|x86.ActiveCfg = Debug|Win32
+		{20D765B4-0479-4F04-BCD7-0877C2C5AB3C}.Debug|x86.Build.0 = Debug|Win32
+		{20D765B4-0479-4F04-BCD7-0877C2C5AB3C}.Release|x86.ActiveCfg = Release|Win32
+		{20D765B4-0479-4F04-BCD7-0877C2C5AB3C}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
