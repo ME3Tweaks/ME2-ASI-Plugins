@@ -72,7 +72,7 @@ public:
 
 struct FNameEntry 
 { 
-	unsigned char	UnknownData00[ 0x10 ]; 
+	unsigned char	UnknownData00[ 0x08 ]; 
 	char			Name[ 0x10 ]; 
 }; 
 
