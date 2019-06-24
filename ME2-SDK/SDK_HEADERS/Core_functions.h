@@ -36,6 +36,8 @@ char* UObject::GetName()
 	return cOutBuffer; 
 } 
 
+
+
 char* UObject::GetNameCPP() 
 { 
 	static char cOutBuffer[ 256 ]; 

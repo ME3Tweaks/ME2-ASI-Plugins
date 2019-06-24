@@ -79,7 +79,9 @@ struct FNameEntry
 struct FName 
 { 
 	int				Index; 
-	unsigned char	unknownData00[ 0x4 ]; 
+	//unsigned char	unknownData00[ 0x4 ]; 
+	UINT32	InstanceIndex;
+
 
 	FName() : Index ( 0 ) {}; 
 
@@ -112,6 +114,11 @@ struct FName
 			} 
 		} 
 	}; 
+
+	UINT32 GetInstanceIndex()
+	{
+		return this->InstanceIndex;
+	};
 
 	static TArray< FNameEntry* >* Names() 
 	{ 

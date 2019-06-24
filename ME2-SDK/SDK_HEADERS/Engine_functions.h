@@ -53255,6 +53255,32 @@ bool USequenceOp::HasLinkedOps ( unsigned long bConsiderInputLinks )
 	return HasLinkedOps_Parms.ReturnValue;
 };
 
+// Gets containing map name for a SequenceObject
+char* USequenceOp::GetContainingMapName()
+{
+	if (this->Class && this->Outer)
+	{
+		class UObject* OuterObj = this->Outer;
+		static std::string lastName = "Undefined";
+		UINT32 lastIndex = -1;
+		while (OuterObj->Class && OuterObj->Outer)
+		{
+			lastName = OuterObj->Outer->GetName();
+
+			lastName = OuterObj->Outer->GetName();
+			lastIndex = OuterObj->Outer->Name.GetInstanceIndex();
+
+			OuterObj = OuterObj->Outer;
+		}
+		if (lastIndex > 0) {
+			lastIndex--; //Subtract 1 to match filesystem indexing
+			lastName += "_" + std::to_string(lastIndex);
+		}
+		return (char*)lastName.c_str();
+	}
+	return "(null)";
+}
+
 // Function Engine.SequenceEvent.Toggled
 // [0x00020800] ( FUNC_Event )
 // Parameters infos:
