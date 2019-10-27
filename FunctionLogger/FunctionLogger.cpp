@@ -1,15 +1,12 @@
 #include <stdio.h>
-#include <io.h>
-#include <fcntl.h>     /* for _O_TEXT and _O_BINARY */  
-#include <string>
 #include <fstream>
 #include <iostream>
 #include <ostream>
 #include <streambuf>
 #include <shlwapi.h>
 
-#include "..\ME2-SDK\ME3TweaksHeader.h"
-#include "..\detours\detours.h"
+#include "../ME2-SDK/ME3TweaksHeader.h"
+#include "../detours/detours.h"
 
 #define _CRT_SECURE_NO_WARNINGS
 #pragma comment(lib, "detours.lib") //Library needed for Hooking part.

@@ -14,6 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ME2-SDK", "ME2-SDK", "{CF32
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "KismetLogger", "KismetLogger\KismetLogger.vcxproj", "{9D4E550F-592A-48A6-BF10-FCA2F9D9FF0D}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AceSlammer", "AceSlammer\AceSlammer.vcxproj", "{E74545A5-A2C8-48EA-B70D-EC44B1B52994}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -34,6 +36,12 @@ Global
 		{9D4E550F-592A-48A6-BF10-FCA2F9D9FF0D}.Release|x64.ActiveCfg = Release|Win32
 		{9D4E550F-592A-48A6-BF10-FCA2F9D9FF0D}.Release|x86.ActiveCfg = Release|Win32
 		{9D4E550F-592A-48A6-BF10-FCA2F9D9FF0D}.Release|x86.Build.0 = Release|Win32
+		{E74545A5-A2C8-48EA-B70D-EC44B1B52994}.Debug|x64.ActiveCfg = Debug|Win32
+		{E74545A5-A2C8-48EA-B70D-EC44B1B52994}.Debug|x86.ActiveCfg = Debug|Win32
+		{E74545A5-A2C8-48EA-B70D-EC44B1B52994}.Debug|x86.Build.0 = Debug|Win32
+		{E74545A5-A2C8-48EA-B70D-EC44B1B52994}.Release|x64.ActiveCfg = Release|Win32
+		{E74545A5-A2C8-48EA-B70D-EC44B1B52994}.Release|x86.ActiveCfg = Release|Win32
+		{E74545A5-A2C8-48EA-B70D-EC44B1B52994}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
