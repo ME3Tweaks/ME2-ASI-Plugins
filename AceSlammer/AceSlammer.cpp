@@ -1,6 +1,5 @@
 #include <shlwapi.h>
 #include "..\ME2-SDK\ME3TweaksHeader.h"
-//#include "..\ME2-SDK\SdkHeaders.h"
 #include <chrono>
 #include <thread>
 #include <functional>
@@ -9,7 +8,9 @@
 #define _CRT_SECURE_NO_WARNINGS
 #pragma comment(lib, "detours.lib") //Library needed for Hooking part.
 
+#if _DEBUG
 ME3TweaksASILogger logger("Ace Slammer v1", "AceSlammer.txt");
+#endif
 
 bool fetchNextItem = false;
 
@@ -19,48 +20,52 @@ const int NEXTSTATE_UPGRAV = 3;
 const int NEXTSTATE_NORMAL = 4;
 int nextState = NEXTSTATE_UPGRAV;
 
+int random(int min, int max) //range : [min, max)
+{
+	static bool first = true;
+	if (first)
+	{
+		srand(time(NULL)); //seeding for the first time only!
+		first = false;
+	}
+	return min + rand() % ((max + 1) - min);
+}
+
 void __fastcall HookedPE(UObject* pObject, void* edx, UFunction* pFunction, void* pParms, void* pResult)
 {
 	//if (fetchNextItem) {
 	char* szName = pFunction->GetFullName();
 	if (fetchNextItem && strcmp(szName, "Function Engine.PlayerController.PlayerTick") == 0)
-		//if (strcmp(szName, "Function SFXGame.BioPlayerController.PlayerTick") == 0)
 	{
-		logger.writeToLog(string_format("%s\n", szName), true);
 		bool nextStateSet = false;
 		ABioPlayerController* bpc = reinterpret_cast<ABioPlayerController*>(pObject);
 		if (!nextStateSet && nextState == NEXTSTATE_SLAMMING)
 		{
-			bpc->CheatManager->SetGravity(-5900);
+			bpc->CheatManager->SetGravity(random(-5000, -8000));
 			nextState = NEXTSTATE_NORMAL;
 			nextStateSet = true;
 		}
 		if (!nextStateSet && nextState == NEXTSTATE_NORMAL)
 		{
-			bpc->CheatManager->SetGravity(-981);
-			//bpc ->WorldInfo->WorldGravityZ = -981;
+			bpc->CheatManager->SetGravity(random(-900,-1062));
 			nextState = NEXTSTATE_UPGRAV;
 			nextStateSet = true;
 		}
 		if (!nextStateSet && nextState == NEXTSTATE_ZEROG)
 		{
-			bpc->CheatManager->SetGravity(3);
-			//bpc->WorldInfo->WorldGravityZ = 3; //just slightly up
+			bpc->CheatManager->SetGravity(random(-100, 100));
 			nextState = NEXTSTATE_SLAMMING;
 			nextStateSet = true;
 		}
 		if (!nextStateSet && nextState == NEXTSTATE_UPGRAV)
 		{
-			bpc->CheatManager->SetGravity(1800);
-
-			//bpc->WorldInfo->WorldGravityZ = 500;
+			bpc->CheatManager->SetGravity(random(1000, 3000));
 			nextState = NEXTSTATE_ZEROG;
 			nextStateSet = true;
 		}
-
+#if _DEBUG
 		logger.writeToLog(string_format("GRAVITY: %f\n", bpc->WorldInfo->WorldGravityZ), true);
-		//logger.writeToConsoleOnly(string_format("Default gravity: %f", wi->DefaultGravityZ), true);
-		//logger.writeToLog(string_format("%s", szName), true);
+#endif
 		fetchNextItem = false;
 	}
 	ProcessEvent(pObject, pFunction, pParms, pResult);
@@ -82,19 +87,19 @@ unsigned test()
 	unsigned nextInterval = 100; //default 100ms
 	if (nextState == NEXTSTATE_SLAMMING)
 	{
-		nextInterval = 2200;
+		nextInterval = random(2000,3000);
 	}
 	if (nextState == NEXTSTATE_NORMAL)
 	{
-		nextInterval = 8000;
+		nextInterval = random(100,16000);
 	}
 	if (nextState == NEXTSTATE_ZEROG)
 	{
-		nextInterval = 2400;
+		nextInterval = random(1000,4000);
 	}
 	if (nextState == NEXTSTATE_UPGRAV)
 	{
-		nextInterval = 450;
+		nextInterval = random(50,1000);
 	}
 	fetchNextItem = true;
 	return nextInterval;
