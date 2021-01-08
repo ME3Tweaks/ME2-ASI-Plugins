@@ -44,7 +44,11 @@ public:
 	int Num() 
 	{ 
 		return this->Count; 
-	}; 
+	};
+
+	bool Any() const {
+		return this->Count > 0;
+	}
 
 	T& operator() ( int i ) 
 	{ 

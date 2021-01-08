@@ -8,7 +8,12 @@
 #include <streambuf>
 #include <cstdarg>
 #include <vector>
+#include <locale> 
+#include <codecvt>
+#ifndef _NOSDK
 #include "SdkHeaders.h"
+#endif
+
 using namespace std;
 
 typedef void(__thiscall *tProcessEvent)(class UObject*, class UFunction *, void *, void *);
@@ -34,6 +39,37 @@ const std::string string_format(const char * const zcFormat, ...) {
 	std::vsnprintf(zc.data(), zc.size(), zcFormat, vaArgs);
 	va_end(vaArgs);
 	return std::string(zc.data(), iLen);
+}
+
+/// <summary>
+/// Converts a widestring (wstring) to wchar_t
+/// </summary>
+/// <param name="wstr"></param>
+/// <returns></returns>
+inline std::string ws2s(const std::wstring& wstr)
+{
+	using convert_typeX = codecvt_utf8<wchar_t>;
+	wstring_convert<convert_typeX, wchar_t> converterX;
+
+	return converterX.to_bytes(wstr);
+}
+
+/// <summary>
+/// Converts a string to a wide string
+/// </summary>
+/// <param name="multi"></param>
+/// <returns></returns>
+std::wstring s2ws(const std::string& multi) {
+	std::wstring wide; wchar_t w; mbstate_t mb{};
+	size_t n = 0, len = multi.length() + 1;
+	while (auto res = mbrtowc(&w, multi.c_str() + n, len - n, &mb)) {
+		if (res == size_t(-1) || res == size_t(-2))
+			throw "invalid encoding";
+
+		n += res;
+		wide += w;
+	}
+	return wide;
 }
 
 class ME3TweaksASILogger
