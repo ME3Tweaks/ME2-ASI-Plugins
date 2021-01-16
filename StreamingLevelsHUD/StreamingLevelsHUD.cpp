@@ -164,11 +164,18 @@ void __fastcall HookedPE(UObject* pObject, void* edx, UFunction* pFunction, void
 							g = 255;
 							b = 229;
 						}
-						else if (sl->bShouldBeLoaded)
+						else if (sl->bShouldBeLoaded && sl->LoadedLevel)
 						{
 							ss << " Loaded";
 							r = 255;
 							g = 255;
+							b = 0;
+						}
+						else if (sl->bShouldBeLoaded)
+						{
+							ss << " Pending load";
+							r = 255;
+							g = 175;
 							b = 0;
 						}
 						const wstring msg = ss.str();
