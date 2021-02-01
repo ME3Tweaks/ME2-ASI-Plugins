@@ -18,6 +18,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AceSlammer", "AceSlammer\Ac
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "StreamingLevelsHUD", "StreamingLevelsHUD\StreamingLevelsHUD.vcxproj", "{B60D6040-248E-472B-B5A6-DB5DDC77A2F0}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PawnHUD", "PawnHUD\PawnHUD.vcxproj", "{3BD34CE1-4ACA-4B07-B07D-D2A7E4BE9896}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DeathCounterLS", "DeathCounterLS\DeathCounterLS.vcxproj", "{E03E7221-5AF1-4BC5-B834-749F8CC9A4D1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -50,6 +54,18 @@ Global
 		{B60D6040-248E-472B-B5A6-DB5DDC77A2F0}.Release|x64.ActiveCfg = Release|Win32
 		{B60D6040-248E-472B-B5A6-DB5DDC77A2F0}.Release|x86.ActiveCfg = Release|Win32
 		{B60D6040-248E-472B-B5A6-DB5DDC77A2F0}.Release|x86.Build.0 = Release|Win32
+		{3BD34CE1-4ACA-4B07-B07D-D2A7E4BE9896}.Debug|x64.ActiveCfg = Debug|Win32
+		{3BD34CE1-4ACA-4B07-B07D-D2A7E4BE9896}.Debug|x86.ActiveCfg = Debug|Win32
+		{3BD34CE1-4ACA-4B07-B07D-D2A7E4BE9896}.Debug|x86.Build.0 = Debug|Win32
+		{3BD34CE1-4ACA-4B07-B07D-D2A7E4BE9896}.Release|x64.ActiveCfg = Release|Win32
+		{3BD34CE1-4ACA-4B07-B07D-D2A7E4BE9896}.Release|x86.ActiveCfg = Release|Win32
+		{3BD34CE1-4ACA-4B07-B07D-D2A7E4BE9896}.Release|x86.Build.0 = Release|Win32
+		{E03E7221-5AF1-4BC5-B834-749F8CC9A4D1}.Debug|x64.ActiveCfg = Debug|Win32
+		{E03E7221-5AF1-4BC5-B834-749F8CC9A4D1}.Debug|x86.ActiveCfg = Debug|Win32
+		{E03E7221-5AF1-4BC5-B834-749F8CC9A4D1}.Debug|x86.Build.0 = Debug|Win32
+		{E03E7221-5AF1-4BC5-B834-749F8CC9A4D1}.Release|x64.ActiveCfg = Release|Win32
+		{E03E7221-5AF1-4BC5-B834-749F8CC9A4D1}.Release|x86.ActiveCfg = Release|Win32
+		{E03E7221-5AF1-4BC5-B834-749F8CC9A4D1}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
