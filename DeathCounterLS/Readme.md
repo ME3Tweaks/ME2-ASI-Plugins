@@ -1,0 +1,1 @@
+This ASI increments the number in a text file ever time the game over HUD is shown on screen. The file it produces is named 'deathcount.txt' and is placed next to the game executable. The count persists across sessions and can be used by things like OBS to show the death count.
