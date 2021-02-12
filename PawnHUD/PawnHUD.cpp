@@ -18,31 +18,32 @@ static void RenderTextSLH(std::wstring msg, const float x, const float y, const 
 
 void __fastcall HookedPE(UObject* pObject, void* edx, UFunction* pFunction, void* pParms, void* pResult)
 {
-	char* funcName = pFunction->GetFullName();
+	const char* funcName = pFunction->GetFullName();
 	if (strcmp(funcName, "Function SFXGame.BioHUD.PostRender") == 0)
 	{
 
 		//auto biopawns = FindObjectsOfType(ABioPawn::StaticClass());
 		ABioHUD* const hud = dynamic_cast<ABioHUD*>(pObject);
 		if (hud->WorldInfo && hud->WorldInfo->PawnList) {
-			auto biopawns = hud->WorldInfo->PawnList;
-			for (int i = 0; i < biopawns.Count; i++)
+			auto pawn = hud->WorldInfo->PawnList;
+			for (int i = 0; pawn; i++)
 			{
-				ABioPawn* biopawn = (ABioPawn*)biopawns.Data[i];
-				if (biopawn->IsDead())
+				//ABioPawn* biopawn = (ABioPawn*)pawn;
+				if (pawn->IsDead())
 				{
 					int r = 255;
 					int g = 25;
 					int b = 25;
-					RenderTextSLH(s2ws(string_format("Dead: %s", biopawn->GetName())), 5.0f, 12 * i, r, g, b, 1, hud->Canvas);
+					RenderTextSLH(s2ws(string_format("Dead: %s", pawn->GetName())), 5.0f, 12 * i, r, g, b, 1, hud->Canvas);
 				}
 				else
 				{
 					int r = 25;
 					int g = 255;
 					int b = 25;
-					RenderTextSLH(s2ws(string_format("Alive: %s", biopawn->GetName())), 5.0f, 12 * i, r, g, b, 1, hud->Canvas);
+					RenderTextSLH(s2ws(string_format("Alive: %s", pawn->GetName())), 5.0f, 12 * i, r, g, b, 1, hud->Canvas);
 				}
+				pawn = pawn->NextPawn;
 			}
 		}
 	}

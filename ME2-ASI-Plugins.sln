@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ME2-SDK", "ME2-SDK", "{CF3260D3-9557-470D-966B-89CDD5EC8AB7}"
 	ProjectSection(SolutionItems) = preProject
 		ME2-SDK\ME3TweaksHeader.h = ME2-SDK\ME3TweaksHeader.h
+		ME2-SDK\ScreenLogger.h = ME2-SDK\ScreenLogger.h
 		ME2-SDK\SdkHeaders.h = ME2-SDK\SdkHeaders.h
 		ME2-SDK\UE3SdkGenerator.log = ME2-SDK\UE3SdkGenerator.log
 	EndProjectSection
@@ -21,6 +22,10 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PawnHUD", "PawnHUD\PawnHUD.vcxproj", "{3BD34CE1-4ACA-4B07-B07D-D2A7E4BE9896}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DeathCounterLS", "DeathCounterLS\DeathCounterLS.vcxproj", "{E03E7221-5AF1-4BC5-B834-749F8CC9A4D1}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ME3ExpInterop", "ME3ExpInterop\ME3ExpInterop.vcxproj", "{7DCB9FDD-7BBA-4CF4-8253-EAC3C530556D}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SeqActLogEnabler", "SeqActLogEnabler\SeqActLogEnabler.vcxproj", "{FCA74B26-594C-48AC-9206-00FAC7884944}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -66,6 +71,20 @@ Global
 		{E03E7221-5AF1-4BC5-B834-749F8CC9A4D1}.Release|x64.ActiveCfg = Release|Win32
 		{E03E7221-5AF1-4BC5-B834-749F8CC9A4D1}.Release|x86.ActiveCfg = Release|Win32
 		{E03E7221-5AF1-4BC5-B834-749F8CC9A4D1}.Release|x86.Build.0 = Release|Win32
+		{7DCB9FDD-7BBA-4CF4-8253-EAC3C530556D}.Debug|x64.ActiveCfg = Debug|x64
+		{7DCB9FDD-7BBA-4CF4-8253-EAC3C530556D}.Debug|x64.Build.0 = Debug|x64
+		{7DCB9FDD-7BBA-4CF4-8253-EAC3C530556D}.Debug|x86.ActiveCfg = Debug|Win32
+		{7DCB9FDD-7BBA-4CF4-8253-EAC3C530556D}.Debug|x86.Build.0 = Debug|Win32
+		{7DCB9FDD-7BBA-4CF4-8253-EAC3C530556D}.Release|x64.ActiveCfg = Release|x64
+		{7DCB9FDD-7BBA-4CF4-8253-EAC3C530556D}.Release|x64.Build.0 = Release|x64
+		{7DCB9FDD-7BBA-4CF4-8253-EAC3C530556D}.Release|x86.ActiveCfg = Release|Win32
+		{7DCB9FDD-7BBA-4CF4-8253-EAC3C530556D}.Release|x86.Build.0 = Release|Win32
+		{FCA74B26-594C-48AC-9206-00FAC7884944}.Debug|x64.ActiveCfg = Debug|Win32
+		{FCA74B26-594C-48AC-9206-00FAC7884944}.Debug|x86.ActiveCfg = Debug|Win32
+		{FCA74B26-594C-48AC-9206-00FAC7884944}.Debug|x86.Build.0 = Debug|Win32
+		{FCA74B26-594C-48AC-9206-00FAC7884944}.Release|x64.ActiveCfg = Release|Win32
+		{FCA74B26-594C-48AC-9206-00FAC7884944}.Release|x86.ActiveCfg = Release|Win32
+		{FCA74B26-594C-48AC-9206-00FAC7884944}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

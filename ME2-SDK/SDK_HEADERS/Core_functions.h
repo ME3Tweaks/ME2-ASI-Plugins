@@ -71,7 +71,7 @@ char* UObject::GetNameCPP()
 	return cOutBuffer; 
 } 
 
-char* UObject::GetFullName() 
+const char* UObject::GetFullName() 
 { 
 	if ( this->Class && this->Outer ) 
 	{ 

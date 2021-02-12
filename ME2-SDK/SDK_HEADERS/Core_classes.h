@@ -142,7 +142,7 @@ public:
 
 	char* GetName(); 
 	char* GetNameCPP(); 
-	char* GetFullName(); 
+	const char* GetFullName(); 
 
 	template< class T > static T* FindObject ( char* ObjectFullName ); 
 	static UClass* FindClass ( char* ClassFullName ); 
@@ -494,6 +494,7 @@ public:
 	virtual void VirtualFunction64 ( );																			// 0x00939B40 (0x100)
 	virtual void VirtualFunction65 ( );																			// 0x008F72D0 (0x104)
 	virtual void ProcessEvent ( class UFunction* pFunction, void* pParms, void* pResult = NULL );				// 0x009121D0 (0x108)
+	const char* GetContainingMapName();
 };
 
 UClass* UObject::pClassPointer = NULL;

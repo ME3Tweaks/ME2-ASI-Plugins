@@ -48,7 +48,7 @@ const char* FormatBytes(size_t bytes, char* keepInStackStr)
 
 void __fastcall HookedPE(UObject* pObject, void* edx, UFunction* pFunction, void* pParms, void* pResult)
 {
-	char* funcName = pFunction->GetFullName();
+	const char* funcName = pFunction->GetFullName();
 	if (strcmp(funcName, "Function SFXGame.BioHUD.PostRender") == 0)
 	{
 		currentCritTick++;

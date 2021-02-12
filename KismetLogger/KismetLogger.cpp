@@ -18,11 +18,11 @@ ME3TweaksASILogger logger("Kismet Logger v1 for ME2", "KismetLog.txt");
 
 void __fastcall HookedPE(UObject* pObject, void* edx, UFunction* pFunction, void* pParms, void* pResult)
 {
-	char* szName = pFunction->GetFullName();
+	const char* szName = pFunction->GetFullName();
 	if (isPartOf(szName, "Function Engine.SequenceOp.Activated")) {
 		USequenceOp* op = (USequenceOp*)pObject;
-		char* fullname = op->GetFullName();
-		char* mapname = op->GetContainingMapName();
+		const char* fullname = op->GetFullName();
+		const char* mapname = op->GetContainingMapName();
 		int instanceIndex = op->Name.GetInstanceIndex();
 		logger.writeToLog(string_format("(%s) %s_%d\n", mapname, fullname, instanceIndex), true);
 	}

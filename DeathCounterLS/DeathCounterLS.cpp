@@ -30,7 +30,7 @@ void UpdateDeathCount()
 
 void __fastcall HookedPE(UObject* pObject, void* edx, UFunction* pFunction, void* pParms, void* pResult)
 {
-	char* szName = pFunction->GetFullName();
+	const char* szName = pFunction->GetFullName();
 	if (isPartOf(szName, "Function SFXGame.BioSPGame.SpawnGameOverGUI")) {
 		UpdateDeathCount();
 	}

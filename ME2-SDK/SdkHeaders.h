@@ -1,3 +1,5 @@
+#pragma once
+
 /*
 #############################################################################################
 # Mass Effect 2 (1.2.1604.0) SDK
@@ -41,7 +43,7 @@ public:
 	}; 
 
 public: 
-	int Num() 
+	int Num() const
 	{ 
 		return this->Count; 
 	};
@@ -165,7 +167,12 @@ struct FString : public TArray< wchar_t >
 		} 
 
 		return *this; 
-	}; 
+	};
+
+	bool operator == (const wchar_t* str) const
+	{
+		return wcscmp(Data, str) == 0;
+	};
 }; 
 
 struct FScriptDelegate 

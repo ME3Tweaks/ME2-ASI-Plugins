@@ -34,7 +34,7 @@ int random(int min, int max) //range : [min, max)
 void __fastcall HookedPE(UObject* pObject, void* edx, UFunction* pFunction, void* pParms, void* pResult)
 {
 	//if (fetchNextItem) {
-	char* szName = pFunction->GetFullName();
+	const char* szName = pFunction->GetFullName();
 	if (fetchNextItem && strcmp(szName, "Function Engine.PlayerController.PlayerTick") == 0)
 	{
 		bool nextStateSet = false;

@@ -15,7 +15,7 @@ ME3TweaksASILogger logger("Function Call Logger", "FunctionCallLog.txt");
 
 void __fastcall HookedPE(UObject *pObject, void *edx, UFunction *pFunction, void *pParms, void *pResult)
 {
-	char *szName = pFunction->GetFullName();
+	const char *szName = pFunction->GetFullName();
 	logger.writeToDiskOnly(string_format("%s\n", szName), true);
 	logger.flush();
 	ProcessEvent(pObject, pFunction, pParms, pResult);

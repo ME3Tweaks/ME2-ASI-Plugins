@@ -70,6 +70,11 @@ UObject* FindObjectOfType(UClass* type)
 	return NULL;
 }
 
+template<typename T>
+bool IsA(UObject* object) {
+	return object->IsA(T::StaticClass());
+}
+
 const std::string string_format(const char * const zcFormat, ...) {
 
 	// initialize use of the variable argument array
@@ -128,32 +133,44 @@ class ME3TweaksASILogger
 public:
 	char* logfname;
 
-	ME3TweaksASILogger(char* loggername, char* _logfname) {
+	ME3TweaksASILogger(char* loggername, char* _logfname, bool console = true) {
 		logfname = _logfname;
 		fopen_s(&log, logfname, "w");
 
-		AllocConsole();
-		AttachConsole(GetCurrentProcessId());
+		if (console)
+		{
+			AllocConsole();
+			AttachConsole(GetCurrentProcessId());
 
-		// Get STDOUT handle
-		HANDLE ConsoleOutput = GetStdHandle(STD_OUTPUT_HANDLE);
-		int SystemOutput = _open_osfhandle(intptr_t(ConsoleOutput), _O_TEXT);
-		FILE *COutputHandle = _fdopen(SystemOutput, "w");
+			// Get STDOUT handle
+			HANDLE ConsoleOutput = GetStdHandle(STD_OUTPUT_HANDLE);
+			int SystemOutput = _open_osfhandle(intptr_t(ConsoleOutput), _O_TEXT);
+			FILE* COutputHandle = _fdopen(SystemOutput, "w");
 
-		// Get STDERR handle
-		HANDLE ConsoleError = GetStdHandle(STD_ERROR_HANDLE);
-		int SystemError = _open_osfhandle(intptr_t(ConsoleError), _O_TEXT);
-		FILE *CErrorHandle = _fdopen(SystemError, "w");
+			// Get STDERR handle
+			HANDLE ConsoleError = GetStdHandle(STD_ERROR_HANDLE);
+			int SystemError = _open_osfhandle(intptr_t(ConsoleError), _O_TEXT);
+			FILE* CErrorHandle = _fdopen(SystemError, "w");
 
-		// Redirect the CRT standard input, output, and error handles to the console
-		freopen_s(&COutputHandle, "CONOUT$", "w", stdout);
-		freopen_s(&CErrorHandle, "CONOUT$", "w", stderr);
+			// Redirect the CRT standard input, output, and error handles to the console
+			freopen_s(&COutputHandle, "CONOUT$", "w", stdout);
+			freopen_s(&CErrorHandle, "CONOUT$", "w", stderr);
+		}
 
 		boottime = GetTickCount64();
 		writeToLog("ME3Tweaks ASI Logger - By Mgamerz\n"s, false);
 		writeToLog(string(loggername) + "\n", false);
 		writeToLog(string_format("Logging to %s%s\n", workingdir().c_str(), _logfname), true);
 		writeToLog("--------------------------------------------------------\n", false);
+	}
+
+	/// <summary>
+	/// Writes the specified string to the log file on disk.
+	/// </summary>
+	/// <param name="str"></param>
+	/// <param name="bTimeStamp"></param>
+	void writeToDiskOnly(const wstring str, const bool bTimeStamp) {
+		writeToDiskOnly(ws2s(str), bTimeStamp);
 	}
 
 	void writeToDiskOnly(string str, bool bTimeStamp) {
@@ -229,7 +246,7 @@ private:
 
 
 
-bool isPartOf(char* w1, char* w2)
+bool isPartOf(const char* w1, const char* w2)
 {
 	int i = 0;
 	int j = 0;
