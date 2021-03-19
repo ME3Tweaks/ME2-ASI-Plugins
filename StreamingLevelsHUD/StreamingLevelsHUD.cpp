@@ -24,6 +24,8 @@ int critNumTicksToFlip = 10; //start
 const int critNumTicksToTurnOff = 30;
 const int critNumTicksToTurnOn = 30;
 bool critVisible = true;
+bool DrawSLH = true;
+bool CanToggleDrawSLH = false;
 
 static void RenderTextSLH(std::wstring msg, const float x, const float y, const char r, const char g, const char b, const float alpha, UCanvas* can)
 {
@@ -51,6 +53,20 @@ void __fastcall HookedPE(UObject* pObject, void* edx, UFunction* pFunction, void
 	const char* funcName = pFunction->GetFullName();
 	if (strcmp(funcName, "Function SFXGame.BioHUD.PostRender") == 0)
 	{
+		// Toggle drawing/not drawing
+		if ((GetKeyState('T') & 0x8000) && (GetKeyState(VK_CONTROL) & 0x8000)) {
+			if (CanToggleDrawSLH) {
+				CanToggleDrawSLH = false; // Will not activate combo again until you re-press combo
+				DrawSLH = !DrawSLH;
+			}
+		}
+		else
+		{
+			if (!(GetKeyState('T') & 0x8000) || !(GetKeyState(VK_CONTROL) & 0x8000)) {
+				CanToggleDrawSLH = true; // can press key combo again
+			}
+		}
+
 		currentCritTick++;
 		if (currentCritTick > critNumTicksToFlip)
 		{
@@ -92,7 +108,8 @@ void __fastcall HookedPE(UObject* pObject, void* edx, UFunction* pFunction, void
 			{
 				alpha = 0.5;
 			}
-			RenderTextSLH(s2ws(string_format("Memory usage: %s (%u bytes)", FormatBytes(pmc.PagefileUsage, str), pmc.PagefileUsage)), 5.0f, 0.0f, r, g, 0, alpha, hud->Canvas);
+			if (DrawSLH)
+				RenderTextSLH(s2ws(string_format("Memory usage: %s (%u bytes)", FormatBytes(pmc.PagefileUsage, str), pmc.PagefileUsage)), 5.0f, 0.0f, r, g, 0, alpha, hud->Canvas);
 
 
 			// Max Hit
@@ -119,12 +136,13 @@ void __fastcall HookedPE(UObject* pObject, void* edx, UFunction* pFunction, void
 				g = 255;
 			}
 
-			char str2[18] = "";
-			RenderTextSLH(s2ws(string_format("Max memory hit: %s (%u bytes)", FormatBytes(MaxMemoryHit, str2), MaxMemoryHit)), 5.0f, 12.0f, r, g, 0, 1.0f, hud->Canvas);
-
+			if (DrawSLH) {
+				char str2[18] = "";
+				RenderTextSLH(s2ws(string_format("Max memory hit: %s (%u bytes)", FormatBytes(MaxMemoryHit, str2), MaxMemoryHit)), 5.0f, 12.0f, r, g, 0, 1.0f, hud->Canvas);
+			}
 		}
 
-		if (hud->WorldInfo)
+		if (DrawSLH && hud->WorldInfo)
 		{
 			//screenLogger->ClearMessages();
 			//logger.writeToConsoleOnly(string_format("Number of streaming levels: %d\n", hud->WorldInfo->StreamingLevels.Count), true);
