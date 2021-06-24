@@ -114,7 +114,11 @@ void SendMessageToMe3Explorer(USequenceOp* op)
 	}
 	msgBuffer[writePos] = 0;
 	writePos++;
-	const auto handle = FindWindow(nullptr, L"ME3Explorer");
+	auto handle = FindWindow(nullptr, L"Legendary Explorer");
+	if (!handle) 
+	{
+		handle = FindWindow(nullptr, L"ME3Explorer");
+	}
 	if (handle)
 	{
 		constexpr unsigned long SENT_FROM_ME2 = 0x02AC00C3;
@@ -294,7 +298,7 @@ void __fastcall HookedPE(UObject* pObject, void* edx, UFunction* pFunction, void
 			GetCamPOV(op);
 		}
 	}
-	else if (IsA<ABioPlayerController>(pObject) && isPartOf(pFunction->GetFullName(), "Function SFXGame.BioPlayerController.PlayerTick"))
+	else if (IsA<ABioPlayerController>(pObject) && strcmp(pFunction->GetName(), "PlayerTick") == 0)
 	{
 		const auto playerController = static_cast<ABioPlayerController*>(pObject);
 		cachedPOV = playerController->PlayerCamera->CameraCache.POV;
@@ -305,8 +309,8 @@ void __fastcall HookedPE(UObject* pObject, void* edx, UFunction* pFunction, void
 void onAttach()
 {
 	MH_Initialize();
-	MH_CreateHook(reinterpret_cast<LPVOID*>(ProcessEvent_Orig), HookedPE, reinterpret_cast<LPVOID*>(ProcessEvent));
-	MH_EnableHook(reinterpret_cast<LPVOID*>(ProcessEvent));
+	MH_CreateHook(reinterpret_cast<LPVOID*>(&ProcessEvent_Orig), HookedPE, ProcessEvent);
+	MH_EnableHook(ProcessEvent);
 }
 
 BOOL WINAPI DllMain(HMODULE hModule, DWORD dwReason, LPVOID lpReserved)
