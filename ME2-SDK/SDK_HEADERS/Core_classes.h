@@ -141,8 +141,10 @@ public:
 	static TArray< UObject* >* GObjObjects(); 
 
 	char* GetName(); 
+	char* GetInstancedName();
 	char* GetNameCPP(); 
 	const char* GetFullName(); 
+	char* GetFullPath();
 
 	template< class T > static T* FindObject ( char* ObjectFullName ); 
 	static UClass* FindClass ( char* ClassFullName ); 
