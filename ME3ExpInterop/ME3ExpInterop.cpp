@@ -11,10 +11,9 @@
 #include "Strsafe.h"
 
 #include "..\ME2-SDK\ME3TweaksHeader.h"
-#include "..\detours\detours.h"
+#include "..\minhook\include\MinHook.h"
 
 #define _CRT_SECURE_NO_WARNINGS
-#pragma comment(lib, "detours.lib") //Library needed for Hooking part.
 #pragma comment(lib, "shlwapi.lib")
 
 TCHAR SplashPath[MAX_PATH];
@@ -115,7 +114,11 @@ void SendMessageToMe3Explorer(USequenceOp* op)
 	}
 	msgBuffer[writePos] = 0;
 	writePos++;
-	const auto handle = FindWindow(nullptr, L"ME3Explorer");
+	auto handle = FindWindow(nullptr, L"Legendary Explorer");
+	if (!handle) 
+	{
+		handle = FindWindow(nullptr, L"ME3Explorer");
+	}
 	if (handle)
 	{
 		constexpr unsigned long SENT_FROM_ME2 = 0x02AC00C3;
@@ -259,6 +262,7 @@ void GetCamPOV(USequenceOp* const op)
 	}
 }
 
+tProcessEvent ProcessEvent_Orig = NULL;
 void __fastcall HookedPE(UObject* pObject, void* edx, UFunction* pFunction, void* pParms, void* pResult)
 {
 	const auto className = pObject->Class->GetName();
@@ -294,20 +298,19 @@ void __fastcall HookedPE(UObject* pObject, void* edx, UFunction* pFunction, void
 			GetCamPOV(op);
 		}
 	}
-	else if (IsA<ABioPlayerController>(pObject) && isPartOf(pFunction->GetFullName(), "Function SFXGame.BioPlayerController.PlayerTick"))
+	else if (IsA<ABioPlayerController>(pObject) && strcmp(pFunction->GetName(), "PlayerTick") == 0)
 	{
 		const auto playerController = static_cast<ABioPlayerController*>(pObject);
 		cachedPOV = playerController->PlayerCamera->CameraCache.POV;
 	}
-	ProcessEvent(pObject, pFunction, pParms, pResult);
+	ProcessEvent_Orig(pObject, pFunction, pParms, pResult);
 }
 
 void onAttach()
 {
-	DetourTransactionBegin();
-	DetourUpdateThread(GetCurrentThread()); //This command set the current working thread to the game current thread.
-	DetourAttach(&(PVOID&)ProcessEvent, HookedPE); //This command will start your Hook.
-	DetourTransactionCommit();
+	MH_Initialize();
+	MH_CreateHook(reinterpret_cast<LPVOID*>(&ProcessEvent_Orig), HookedPE, ProcessEvent);
+	MH_EnableHook(ProcessEvent);
 }
 
 BOOL WINAPI DllMain(HMODULE hModule, DWORD dwReason, LPVOID lpReserved)
